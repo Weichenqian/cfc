@@ -3,341 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capital Fight Club Schedule</title>
+    <title>CFC Schedule - Precision Dual Language</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-color: #0a0a0a;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #080808;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", sans-serif;
         }
-        .logo-filter {
-            filter: invert(1) brightness(1.5) drop-shadow(0 0 15px rgba(255,255,255,0.1));
+
+        /* 动画过渡 */
+        .course-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .filter-btn { transition: all 0.3s ease; cursor: pointer; }
+        
+        /* 筛选状态样式 */
+        .dimmed { opacity: 0.1; transform: scale(0.96); pointer-events: none; filter: grayscale(1); }
+        
+        /* 选中的按钮发光效果 */
+        .active-all { border-color: #52525b; background: #27272a; }
+        .active-gm { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); box-shadow: 0 0 15px rgba(239, 68, 68, 0.2); }
+        .active-slt { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
+
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        
+        /* 双语文字间距优化 */
+        .lang-pair-main { line-height: 1.1; }
+        .lang-pair-sub { font-size: 0.65em; opacity: 0.7; letter-spacing: 0.05em; margin-top: 2px; }
+        
+        /* 标签双语样式 */
+        .tag-pill {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 900;
+            line-height: 1.1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
+
+        /* 强调时间标签 */
+        .time-badge {
+            background: #ffffff;
+            color: #000000;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            white-space: nowrap;
         }
-        .slot-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        /* 自适应网格控制 */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* 移动端单列 */
+            gap: 1rem;
         }
-        @media (min-width: 768px) {
-            .slot-card:hover {
-                transform: translateY(-8px);
-                filter: brightness(1.1);
+
+        @media (min-width: 1024px) {
+            .schedule-grid {
+                grid-template-columns: 120px repeat(7, 1fr); /* 大屏恢复 7+1 模式 */
             }
-            .header-brand-container {
-                min-width: 480px;
-            }
+            .mobile-day-label { display: none; } /* 电脑端隐藏移动端星期标题 */
         }
     </style>
 </head>
-<body class="text-white selection:bg-red-500">
+<body class="p-4 md:p-8">
 
-    <div class="min-h-screen p-4 md:p-8 max-w-[1400px] mx-auto">
-        
-        <!-- Header -->
-        <header class="flex flex-col md:flex-row justify-between items-center md:items-end mb-8 md:mb-12 gap-8 text-center md:text-left">
-            <div class="header-brand-container space-y-4 md:space-y-6 flex flex-col items-center md:items-start w-full md:w-auto">
-                <div class="h-16 md:h-28 flex items-center justify-center md:justify-start">
-                    <img src="Capital-Fight-Club-logo2.png" alt="Logo" class="h-full w-auto logo-filter object-contain">
-                </div>
-                <div id="slogan" class="text-[9px] md:text-[11px] font-black underline decoration-red-600 decoration-2 underline-offset-8 tracking-[1.95em] text-zinc-400 uppercase whitespace-nowrap transition-all duration-300">
-                    拳击 · 泰拳 · 实战
+    <div class="max-w-[1500px] mx-auto">
+        <header class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-10 gap-8">
+            <div class="space-y-4">
+                <img src="Capital-Fight-Club-logo2.png" alt="CFC Logo" class="h-16 md:h-20 invert brightness-200" onerror="this.src='https://via.placeholder.com/200x80?text=CFC+LOGO'">
+                <div class="border-l-4 border-red-600 pl-4 space-y-1">
+                    <div class="text-sm font-black tracking-[0.3em] text-white uppercase">拳击 · 泰拳 · 实战</div>
+                    <div class="text-[10px] font-bold tracking-[0.2em] text-zinc-500 uppercase italic">Boxing · Muay Thai · Sparring</div>
                 </div>
             </div>
 
-            <div class="flex flex-col items-center md:items-end gap-5 w-full md:w-auto">
-                <!-- Language Switcher -->
-                <div class="flex bg-zinc-800 p-1 rounded-full border border-zinc-700 shadow-inner">
-                    <button onclick="setLanguage('zh')" id="btn-zh" class="px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-black transition-all bg-red-600 text-white shadow-lg scale-105">中文</button>
-                    <button onclick="setLanguage('en')" id="btn-en" class="px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-black transition-all text-zinc-400 hover:text-white">EN</button>
-                </div>
-                
-                <!-- Legend -->
-                <div class="flex gap-6 md:gap-8">
-                    <div class="flex items-center gap-2 md:gap-3">
-                        <div class="w-3 h-3 md:w-4 md:h-4 bg-red-600 rounded-sm shadow-[0_0_12px_rgba(220,38,38,0.5)]"></div>
-                        <span id="legend-gm" class="text-[10px] md:text-[12px] font-black uppercase tracking-widest text-zinc-200">国贸店</span>
-                    </div>
-                    <div class="flex items-center gap-2 md:gap-3">
-                        <div class="w-3 h-3 md:w-4 md:h-4 bg-blue-600 rounded-sm shadow-[0_0_12px_rgba(37,99,235,0.5)]"></div>
-                        <span id="legend-slt" class="text-[10px] md:text-[12px] font-black uppercase tracking-widest text-zinc-200">三里屯店</span>
-                    </div>
+            <div class="flex flex-wrap items-center gap-4 bg-zinc-900/80 p-3 rounded-2xl border border-white/5 shadow-2xl">
+                <span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-2">选择店铺 / SELECT STORE</span>
+                <div class="flex gap-2">
+                    <button onclick="filterStore('all')" id="btn-all" class="filter-btn active-all px-4 py-2 rounded-xl border border-zinc-800 text-[10px] md:text-[11px] font-black uppercase">
+                        全部店铺<br><span class="opacity-50 text-[9px]">ALL STORES</span>
+                    </button>
+                    <button onclick="filterStore('gm')" id="btn-gm" class="filter-btn px-4 py-2 rounded-xl border border-zinc-800 text-[10px] md:text-[11px] font-black uppercase flex flex-col items-center">
+                        <span class="flex items-center gap-2 font-bold"><div class="w-2 h-2 bg-red-600 rounded-full"></div>国贸店</span>
+                        <span class="opacity-50 text-[9px]">GUOMAO</span>
+                    </button>
+                    <button onclick="filterStore('slt')" id="btn-slt" class="filter-btn px-4 py-2 rounded-xl border border-zinc-800 text-[10px] md:text-[11px] font-black uppercase flex flex-col items-center">
+                        <span class="flex items-center gap-2 font-bold"><div class="w-2 h-2 bg-blue-600 rounded-full"></div>三里屯店</span>
+                        <span class="opacity-50 text-[9px]">SANLITUN</span>
+                    </button>
                 </div>
             </div>
         </header>
 
-        <!-- Main Content Area -->
-        <div id="schedule-container" class="rounded-[1.5rem] md:rounded-[2.5rem] border border-zinc-800 bg-zinc-900/40 backdrop-blur-xl shadow-2xl overflow-hidden">
-            <!-- Desktop Grid (Hidden on Mobile) -->
-            <div class="hidden md:block overflow-x-auto scrollbar-hide">
-                <div class="min-w-[1100px] p-8">
-                    <div id="schedule-grid-desktop" class="grid grid-cols-[100px_repeat(7,1fr)] gap-4">
-                        <!-- JS Desktop Content -->
+        <div class="overflow-hidden lg:overflow-x-auto scrollbar-hide rounded-[2rem] border border-zinc-800 bg-zinc-900/20 backdrop-blur-xl shadow-2xl">
+            <div class="min-w-full lg:min-w-[1300px] p-4 lg:p-6">
+                <div class="hidden lg:grid grid-cols-[120px_repeat(7,1fr)] gap-4 mb-6 text-center">
+                    <div class="flex items-center justify-center text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em]">Time 时段</div>
+                    <div class="py-4 rounded-2xl bg-zinc-800/40 font-black border border-white/5">
+                        <div class="text-sm">周一</div><div class="text-[10px] opacity-40 uppercase">Monday</div>
+                    </div>
+                    <div class="py-4 rounded-2xl bg-zinc-800/40 font-black border border-white/5">
+                        <div class="text-sm">周二</div><div class="text-[10px] opacity-40 uppercase">Tuesday</div>
+                    </div>
+                    <div class="py-4 rounded-2xl bg-zinc-800/40 font-black border border-white/5">
+                        <div class="text-sm">周三</div><div class="text-[10px] opacity-40 uppercase">Wednesday</div>
+                    </div>
+                    <div class="py-4 rounded-2xl bg-zinc-800/40 font-black border border-white/5">
+                        <div class="text-sm">周四</div><div class="text-[10px] opacity-40 uppercase">Thursday</div>
+                    </div>
+                    <div class="py-4 rounded-2xl bg-zinc-800/40 font-black border border-white/5">
+                        <div class="text-sm">周五</div><div class="text-[10px] opacity-40 uppercase">Friday</div>
+                    </div>
+                    <div class="py-4 rounded-2xl bg-zinc-900 font-black text-red-500 border border-red-900/30">
+                        <div class="text-sm">周六</div><div class="text-[10px] opacity-60 uppercase font-bold">Saturday</div>
+                    </div>
+                    <div class="py-4 rounded-2xl bg-zinc-900 font-black text-red-500 border border-red-900/30">
+                        <div class="text-sm">周日</div><div class="text-[10px] opacity-60 uppercase font-bold">Sunday</div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Mobile List (Hidden on Desktop) -->
-            <div class="block md:hidden p-4 space-y-8" id="schedule-list-mobile">
-                <!-- JS Mobile Content -->
+                <div id="schedule-body" class="schedule-grid">
+                    </div>
             </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="mt-8 md:mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center p-6 md:p-10 bg-zinc-900/80 rounded-[2rem] md:rounded-[4rem] border border-zinc-800">
-            <div class="space-y-4 md:space-y-6">
-                <div class="flex items-center gap-4 md:gap-6">
-                    <div class="w-1.5 h-10 md:w-2 md:h-14 bg-red-600 rounded-full shadow-[0_0_15px_#dc2626]"></div>
-                    <div id="addr-gm">
-                        <p class="font-black text-base md:text-lg uppercase tracking-widest text-zinc-100">国贸店 (朝外SOHO)</p>
-                        <p class="text-[11px] md:text-[13px] text-zinc-500 font-bold">朝外SOHO B座 0256</p>
+        <footer class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 md:p-10 bg-zinc-900/40 rounded-[2rem] md:rounded-[3rem] border border-white/5 items-center">
+            <div class="space-y-2">
+                <div onclick="filterStore('gm')" class="group cursor-pointer flex items-center gap-4 p-3 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="w-1 h-10 bg-red-600 rounded-full group-hover:h-12 group-hover:shadow-[0_0_15px_#ef4444] transition-all"></div>
+                    <div>
+                        <p class="font-black text-xs uppercase tracking-widest text-zinc-300">国贸店 / GUOMAO</p>
+                        <p class="text-[10px] text-zinc-500 mt-1">朝外SOHO B座 0256 / Suite 0256, Bld B, Chao Wai SOHO</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4 md:gap-6">
-                    <div class="w-1.5 h-10 md:w-2 md:h-14 bg-blue-600 rounded-full shadow-[0_0_15px_#2563eb]"></div>
-                    <div id="addr-slt">
-                        <p class="font-black text-base md:text-lg uppercase tracking-widest text-zinc-100">三里屯店 (世茂工三)</p>
-                        <p class="text-[11px] md:text-[13px] text-zinc-500 font-bold">世茂工三 4层中庭</p>
+                <div onclick="filterStore('slt')" class="group cursor-pointer flex items-center gap-4 p-3 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="w-1 h-10 bg-blue-600 rounded-full group-hover:h-12 group-hover:shadow-[0_0_15px_#3b82f6] transition-all"></div>
+                    <div>
+                        <p class="font-black text-xs uppercase tracking-widest text-zinc-300">三里屯店 / SANLITUN</p>
+                        <p class="text-[10px] text-zinc-500 mt-1">世茂工三 4层中庭 / 4F Atrium, Shimao Gongsan</p>
                     </div>
                 </div>
             </div>
 
-            <div class="hidden lg:flex flex-col items-center">
-                <p class="text-6xl font-black italic leading-none text-center tracking-tighter uppercase">
+            <div class="flex flex-col items-center py-4 lg:py-0">
+                <p class="text-4xl md:text-6xl font-black italic leading-none text-center tracking-tighter uppercase opacity-10 select-none">
                     BE THE<br/><span class="text-red-600">CAPITAL</span>
                 </p>
             </div>
 
-            <div class="flex items-center justify-between md:justify-end gap-4 md:gap-8 bg-black/60 p-4 md:p-6 rounded-[2rem] md:rounded-[3.5rem] border border-white/5">
+            <div class="flex items-center justify-between lg:justify-end gap-6 bg-black/60 p-5 rounded-[2.5rem] border border-white/10 shadow-2xl">
                 <div class="text-right">
-                    <p id="scan-text" class="text-[9px] md:text-[11px] font-black text-red-600 uppercase tracking-[0.4em] mb-1 md:mb-2">扫码预约</p>
-                    <p id="join-text" class="text-2xl md:text-3xl font-black leading-none uppercase italic tracking-tighter">立即<br/>报名</p>
+                    <p class="text-[9px] font-black text-red-600 uppercase tracking-[0.3em] mb-1">预约课程 / BOOK CLASS</p>
+                    <p class="text-lg md:text-xl font-black leading-tight uppercase italic text-white">立即扫描体验<br><span class="text-sm opacity-60">SCAN TO JOIN</span></p>
                 </div>
-                <div class="bg-white p-1 rounded-xl md:rounded-2xl w-20 h-20 md:w-28 md:h-28 shadow-2xl flex items-center justify-center overflow-hidden">
-                    <img src="Scan-to-Book.jpg" alt="QR" class="w-full h-full object-contain">
+                <div class="bg-white p-1 rounded-2xl w-16 h-16 md:w-20 md:h-20 shadow-2xl overflow-hidden">
+                    <img src="Scan-to-Book.jpg" alt="QR" class="w-full h-full object-contain" onerror="this.src='https://via.placeholder.com/100?text=QR'">
                 </div>
             </div>
         </footer>
     </div>
 
     <script>
-        let currentLang = 'zh';
+        const SCHEDULE_DATA = [
+            { 
+                timeRange: "09:30 - 11:00", 
+                slots: [
+                    { type: 'slt', name: { zh: '拳击', en: 'Boxing' }, coach: 'Liu Lianjie', tag: {zh:'高级', en:'ADV.'}, specificTime: '09:30' },
+                    null,
+                    { type: 'slt', name: { zh: '拳击', en: 'Boxing' }, coach: 'Liu Lianjie', tag: {zh:'高级', en:'ADV.'}, specificTime: '09:30' },
+                    null, 
+                    null,
+                    { type: 'gm', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', specificTime: '12:00' },
+                    { type: 'gm', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', specificTime: '12:00' }
+                ]
+            },
+            { 
+                timeRange: "12:20 - 13:40", 
+                slots: [
+                    { type: 'gm', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson & Mardi' },
+                    { type: 'gm', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team' },
+                    { type: 'gm', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson' },
+                    { type: 'gm', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team' },
+                    { type: 'gm', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson & Mardi' },
+                    { type: 'gm', name: { zh: '拳击', en: 'Boxing' }, coach: 'J&M', specificTime: '13:00' },
+                    { type: 'gm', name: { zh: '拳击', en: 'Boxing' }, coach: 'Mardi', specificTime: '13:00' }
+                ]
+            },
+            { 
+                timeRange: "15:00 - 18:30", 
+                slots: [
+                    { type: 'gm', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', specificTime: '18:30' },
+                    { type: 'gm', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson', specificTime: '18:30' },
+                    { type: 'gm', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', specificTime: '16:00' },
+                    { type: 'slt', name: { zh: '拳击实战', en: 'Boxing Spar.' }, coach: 'Liu Lianjie', tag: {zh:'实战', en:'SPAR.'}, specificTime: '15:00' },
+                    null,
+                    { type: 'gm', name: { zh: '泰拳+缠抱', en: 'MT + Clinch' }, coach: 'Thai Team', specificTime: '14:00 (90m)' },
+                    { type: 'gm', name: { zh: '泰拳+缠抱', en: 'MT + Clinch' }, coach: 'Thai Team', specificTime: '14:00 (90m)' }
+                ]
+            },
+            { 
+                timeRange: "19:00 - 20:20", 
+                slots: [
+                    { type: 'slt', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson' },
+                    { type: 'slt', name: { zh: '拳击', en: 'Boxing' }, coach: 'Mardi' },
+                    { type: 'slt', name: { zh: '拳击', en: 'Boxing' }, coach: 'Liu Lianjie' },
+                    { type: 'slt', name: { zh: '拳击', en: 'Boxing' }, coach: 'Mardi' },
+                    { type: 'slt', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson' },
+                    { type: 'slt', name: { zh: '拳击实战', en: 'Boxing Spar.' }, coach: 'J&M', specificTime: '16:00' },
+                    { type: 'slt', name: { zh: '拳击实战', en: 'Boxing Spar.' }, coach: 'Liu Lianjie', specificTime: '16:00' }
+                ]
+            },
+            { 
+                timeRange: "20:00 - 21:30", 
+                slots: [
+                    { type: 'gm', name: { zh: '拳击', en: 'Boxing' }, coach: 'Mardi', specificTime: '19:30' },
+                    { type: 'gm', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', specificTime: '19:30' },
+                    { type: 'gm', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', specificTime: '19:30' },
+                    { type: 'gm', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson', specificTime: '20:00' },
+                    { type: 'gm', name: { zh: '拳击', en: 'Boxing' }, coach: 'Mardi', specificTime: '19:30' },
+                    { type: 'slt', name: { zh: '拳击', en: 'Boxing' }, coach: 'J&M', specificTime: '17:30' },
+                    { type: 'slt', name: { zh: '拳击', en: 'Boxing' }, coach: 'Mardi', specificTime: '17:30' }
+                ]
+            }
+        ];
 
         const DAYS = [
-            { zh: '周一', en: 'MON' }, { zh: '周二', en: 'TUE' }, { zh: '周三', en: 'WED' },
-            { zh: '周四', en: 'THU' }, { zh: '周五', en: 'FRI' }, { zh: '周六', en: 'SAT' }, { zh: '周日', en: 'SUN' }
+            {zh: '周一', en: 'MON'}, {zh: '周二', en: 'TUE'}, {zh: '周三', en: 'WED'}, 
+            {zh: '周四', en: 'THU'}, {zh: '周五', en: 'FRI'}, {zh: '周六', en: 'SAT'}, {zh: '周日', en: 'SUN'}
         ];
 
-        const SCHEDULE_DATA = [
-            {
-                timeDisplay: "09:30-12:00",
-                slots: [
-                    { type: 'sanlitun', name: { zh: '拳击', en: 'Boxing' }, coach: 'Liu Lianjie', tag: { zh: '高级', en: 'Adv.' }, actualTime: "09:30" },
-                    { type: 'guomao', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', actualTime: "12:00" },
-                    { type: 'sanlitun', name: { zh: '拳击', en: 'Boxing' }, coach: 'Liu Lianjie', tag: { zh: '高级', en: 'Adv.' }, actualTime: "09:30" },
-                    null, null,
-                    { type: 'guomao', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', actualTime: "12:00" },
-                    { type: 'guomao', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', actualTime: "12:00" }
-                ]
-            },
-            {
-                timeDisplay: "12:20-13:00",
-                slots: [
-                    { type: 'guomao', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson & Mardi', actualTime: "12:20" },
-                    { type: 'guomao', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team & Jerson', actualTime: "12:20" },
-                    { type: 'guomao', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson', actualTime: "12:20" },
-                    { type: 'guomao', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team & Jerson', actualTime: "12:20" },
-                    { type: 'guomao', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson & Mardi', actualTime: "12:20" },
-                    { type: 'guomao', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson & Mardi', actualTime: "13:00" },
-                    { type: 'guomao', name: { zh: '拳击', en: 'Boxing' }, coach: 'Mardi', actualTime: "13:00" }
-                ]
-            },
-            {
-                timeDisplay: "15:00-16:00",
-                slots: [
-                    null, null, 
-                    { type: 'guomao', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson', actualTime: "16:00" },
-                    { type: 'sanlitun', name: { zh: '拳击实战', en: 'Boxing Spar.' }, coach: 'Liu Lianjie', tag: { zh: '实战', en: 'Spar.' }, actualTime: "15:00" },
-                    null,
-                    { type: 'guomao', name: { zh: '泰拳+缠抱', en: 'MT + Clinch' }, coach: 'Thai Team', note: '(90m)', actualTime: "16:00" },
-                    { type: 'guomao', name: { zh: '泰拳+缠抱', en: 'MT + Clinch' }, coach: 'Thai Team', note: '(90m)', actualTime: "16:00" }
-                ]
-            },
-            {
-                timeDisplay: "18:30",
-                slots: [
-                    { type: 'guomao', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', actualTime: "18:30" },
-                    { type: 'guomao', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson', actualTime: "18:30" },
-                    null, null, null, null, null
-                ]
-            },
-            {
-                timeDisplay: "16:00-19:00",
-                slots: [
-                    { type: 'sanlitun', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson', actualTime: "19:00" },
-                    { type: 'sanlitun', name: { zh: '拳击', en: 'Boxing' }, coach: 'Mardi', actualTime: "19:00" },
-                    { type: 'sanlitun', name: { zh: '拳击', en: 'Boxing' }, coach: 'Liu Lianjie', actualTime: "19:00" },
-                    { type: 'sanlitun', name: { zh: '拳击', en: 'Boxing' }, coach: 'Mardi', actualTime: "19:00" },
-                    { type: 'sanlitun', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson', actualTime: "19:00" },
-                    { type: 'sanlitun', name: { zh: '拳击实战', en: 'Boxing Spar.' }, coach: 'Jerson & Mardi', actualTime: "16:00" },
-                    { type: 'sanlitun', name: { zh: '拳击实战', en: 'Boxing Spar.' }, coach: 'Liu Lianjie', actualTime: "16:00" }
-                ]
-            },
-            {
-                timeDisplay: "17:30-20:00",
-                slots: [
-                    { type: 'guomao', name: { zh: '拳击', en: 'Boxing' }, coach: 'Mardi', actualTime: "19:30" },
-                    { type: 'guomao', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', actualTime: "19:30" },
-                    { type: 'guomao', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', actualTime: "19:30" },
-                    { type: 'guomao', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson', actualTime: "20:00" },
-                    { type: 'guomao', name: { zh: '拳击', en: 'Boxing' }, coach: 'Mardi', actualTime: "19:30" },
-                    { type: 'sanlitun', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson & Mardi', actualTime: "17:30" },
-                    { type: 'sanlitun', name: { zh: '拳击', en: 'Boxing' }, coach: 'Mardi', actualTime: "17:30" }
-                ]
-            }
-        ];
+        let currentStoreFilter = 'all';
 
-        function renderDesktop() {
-            const grid = document.getElementById('schedule-grid-desktop');
-            grid.innerHTML = '';
-            
-            const label = document.createElement('div');
-            label.className = "flex items-center justify-center text-[10px] font-black text-zinc-600 tracking-tighter uppercase";
-            label.innerText = "Schedule";
-            grid.appendChild(label);
-
-            DAYS.forEach((day, i) => {
-                const dayEl = document.createElement('div');
-                const isWeekend = i >= 5;
-                dayEl.className = `py-5 text-center rounded-2xl bg-zinc-800/60 border border-zinc-700/50 font-black text-sm tracking-widest ${isWeekend ? 'text-red-500 bg-red-500/5' : 'text-zinc-100'}`;
-                dayEl.innerText = currentLang === 'zh' ? day.zh : day.en;
-                grid.appendChild(dayEl);
+        function filterStore(store) {
+            currentStoreFilter = store;
+            const btns = ['all', 'gm', 'slt'];
+            btns.forEach(b => {
+                const el = document.getElementById('btn-' + b);
+                el.classList.remove('active-all', 'active-gm', 'active-slt');
+                if(b === store) {
+                    el.classList.add(store === 'all' ? 'active-all' : (store === 'gm' ? 'active-gm' : 'active-slt'));
+                }
             });
+            render();
+        }
+
+        function render() {
+            const body = document.getElementById('schedule-body');
+            body.innerHTML = '';
 
             SCHEDULE_DATA.forEach(row => {
-                const timeEl = document.createElement('div');
-                const isRange = row.timeDisplay.includes('-');
-                timeEl.className = `flex items-center justify-center font-black text-zinc-500 italic ${isRange ? 'text-[11px]' : 'text-sm'}`;
-                timeEl.innerText = row.timeDisplay;
-                grid.appendChild(timeEl);
+                const startTime = row.timeRange.split(' - ')[0];
 
-                row.slots.forEach(cell => {
-                    const cellContainer = document.createElement('div');
-                    cellContainer.className = "min-h-[145px]";
-                    if (cell) {
-                        cellContainer.innerHTML = createCourseCard(cell);
-                    } else {
-                        cellContainer.innerHTML = `<div class="h-full rounded-2xl border border-zinc-800/40 bg-zinc-950/40"></div>`;
+                // 电脑端的时间轴标签
+                const timeLabel = `
+                    <div class="hidden lg:flex flex-col items-center justify-center border-b border-white/5 pb-6">
+                        <div class="text-[13px] font-black text-white italic tracking-tighter">${startTime}</div>
+                        <div class="w-px h-4 bg-zinc-800 my-1"></div>
+                        <div class="text-[10px] font-bold text-zinc-600">${row.timeRange.split(' - ')[1]}</div>
+                    </div>
+                `;
+                body.innerHTML += timeLabel;
+                
+                // 课程格子
+                row.slots.forEach((cell, index) => {
+                    if (!cell) {
+                        // 移动端隐藏空格子
+                        body.innerHTML += `<div class="hidden lg:block min-h-[140px] rounded-2xl border border-white/5 bg-zinc-900/10"></div>`;
+                        return;
                     }
-                    grid.appendChild(cellContainer);
+
+                    const isDimmed = currentStoreFilter !== 'all' && cell.type !== currentStoreFilter;
+                    const bgColor = cell.type === 'gm' ? 'from-red-600 to-red-800' : 'from-blue-600 to-blue-800';
+                    const storeNameZh = cell.type === 'gm' ? '国贸' : '三里屯';
+                    const storeNameEn = cell.type === 'gm' ? 'GUOMAO' : 'SANLITUN';
+                    const displayTime = cell.specificTime || startTime; // 如果没有具体时间，使用时段开始时间
+                    
+                    body.innerHTML += `
+                        <div class="min-h-[120px] lg:min-h-[140px] course-card rounded-2xl p-4 flex flex-col justify-between border border-white/10 bg-gradient-to-br ${bgColor} ${isDimmed ? 'dimmed' : 'shadow-xl'}">
+                            <div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <div class="flex flex-col gap-1">
+                                        <div class="lg:hidden text-[9px] font-black bg-black/30 self-start px-2 py-0.5 rounded text-zinc-300 uppercase">${DAYS[index].zh} ${DAYS[index].en}</div>
+                                        ${cell.tag ? `
+                                            <div class="tag-pill">
+                                                <span>${cell.tag.zh}</span>
+                                                <span class="opacity-60">${cell.tag.en}</span>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                    
+                                    <div class="time-badge">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        ${displayTime}
+                                    </div>
+                                </div>
+                                <div class="font-black tracking-tight lang-pair-main uppercase">
+                                    <div class="text-[1rem] lg:text-[1.1rem] text-white">${cell.name.zh}</div>
+                                    <div class="lang-pair-sub text-white">${cell.name.en}</div>
+                                </div>
+                            </div>
+                            <div class="text-[10px] font-bold uppercase border-t border-white/10 pt-3 flex flex-col gap-1 mt-4 lg:mt-0">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-white">${cell.coach}</span>
+                                </div>
+                                <div class="flex items-center gap-1.5 opacity-60 text-[8px] tracking-tighter">
+                                    <span class="bg-black/20 px-1 rounded text-white">${storeNameZh}</span>
+                                    <span class="opacity-80 text-white">${storeNameEn}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
                 });
             });
         }
 
-        function renderMobile() {
-            const list = document.getElementById('schedule-list-mobile');
-            list.innerHTML = '';
-
-            DAYS.forEach((day, dayIndex) => {
-                const daySection = document.createElement('div');
-                daySection.className = "space-y-4";
-                
-                const isWeekend = dayIndex >= 5;
-                const dayTitle = document.createElement('div');
-                dayTitle.className = `text-lg font-black tracking-[0.2em] border-b-2 pb-2 ${isWeekend ? 'text-red-500 border-red-500/30' : 'text-white border-white/10'}`;
-                dayTitle.innerText = currentLang === 'zh' ? day.zh : day.en;
-                daySection.appendChild(dayTitle);
-
-                let hasClass = false;
-                SCHEDULE_DATA.forEach(row => {
-                    const cell = row.slots[dayIndex];
-                    if (cell) {
-                        hasClass = true;
-                        const cardWrapper = document.createElement('div');
-                        cardWrapper.className = "w-full";
-                        cardWrapper.innerHTML = createCourseCard(cell, true);
-                        daySection.appendChild(cardWrapper);
-                    }
-                });
-
-                if (!hasClass) {
-                    const noClass = document.createElement('div');
-                    noClass.className = "text-zinc-600 italic text-sm py-2";
-                    noClass.innerText = currentLang === 'zh' ? "暂无课程" : "No Classes";
-                    daySection.appendChild(noClass);
-                }
-
-                list.appendChild(daySection);
-            });
-        }
-
-        function createCourseCard(cell, isMobile = false) {
-            const bgClass = cell.type === 'guomao' ? 'from-red-600 to-red-700' : 'from-blue-600 to-blue-700';
-            const timeBadgeClass = cell.type === 'guomao' ? 'bg-red-900/40 text-red-200' : 'bg-blue-900/40 text-blue-200';
-            
-            return `
-                <div class="h-full ${isMobile ? 'p-4' : 'p-5'} rounded-2xl flex flex-col justify-between slot-card border border-white/10 shadow-lg bg-gradient-to-br ${bgClass} relative overflow-hidden">
-                    <div>
-                        <div class="flex justify-between items-start mb-3 gap-1">
-                            ${cell.actualTime ? `<span class="px-2.5 py-1 rounded-md ${timeBadgeClass} text-[11px] font-black italic border border-white/10 ring-2 ring-black/10">${cell.actualTime}</span>` : '<span></span>'}
-                            ${cell.tag ? `<span class="inline-block px-2.5 py-1 rounded-md bg-black/30 text-[9px] font-black uppercase tracking-widest">${currentLang === 'zh' ? cell.tag.zh : cell.tag.en}</span>` : '<span></span>'}
-                        </div>
-                        <div class="font-black ${isMobile ? 'text-lg' : 'text-xl'} leading-tight tracking-tight">
-                            ${currentLang === 'zh' ? cell.name.zh : cell.name.en}
-                            ${cell.note ? `<span class="text-[10px] block mt-1 font-black opacity-60 italic">${cell.note}</span>` : ''}
-                        </div>
-                    </div>
-                    <div class="text-[11px] font-black uppercase border-t border-white/20 pt-3 mt-3 opacity-95 tracking-wider">
-                        ${cell.coach}
-                    </div>
-                </div>
-            `;
-        }
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            const btnZh = document.getElementById('btn-zh');
-            const btnEn = document.getElementById('btn-en');
-            const slogan = document.getElementById('slogan');
-            
-            // 针对移动端优化字间距
-            const isMobile = window.innerWidth < 768;
-
-            if (lang === 'zh') {
-                btnZh.className = "px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-black transition-all bg-red-600 text-white shadow-lg scale-105";
-                btnEn.className = "px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-black transition-all text-zinc-400 hover:text-white";
-                slogan.innerText = "拳击 · 泰拳 · 实战";
-                slogan.style.letterSpacing = isMobile ? "1.2em" : "1.95em";
-                
-                document.getElementById('legend-gm').innerText = "国贸店";
-                document.getElementById('legend-slt').innerText = "三里屯店";
-                document.getElementById('addr-gm').innerHTML = `<p class="font-black text-base md:text-lg uppercase tracking-widest text-zinc-100">国贸店 (朝外SOHO)</p><p class="text-[11px] md:text-[13px] text-zinc-500 font-bold">朝外SOHO B座 0256</p>`;
-                document.getElementById('addr-slt').innerHTML = `<p class="font-black text-base md:text-lg uppercase tracking-widest text-zinc-100">三里屯店 (世茂工三)</p><p class="text-[11px] md:text-[13px] text-zinc-500 font-bold">世茂工三 4层中庭</p>`;
-                document.getElementById('scan-text').innerText = "扫码预约";
-                document.getElementById('join-text').innerHTML = "立即<br/>报名";
-            } else {
-                btnEn.className = "px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-black transition-all bg-red-600 text-white shadow-lg scale-105";
-                btnZh.className = "px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-black transition-all text-zinc-400 hover:text-white";
-                slogan.innerText = "BOXING · MUAY THAI · SPARRING";
-                slogan.style.letterSpacing = isMobile ? "0.3em" : "0.5em";
-
-                document.getElementById('legend-gm').innerText = "Guomao";
-                document.getElementById('legend-slt').innerText = "Sanlitun";
-                document.getElementById('addr-gm').innerHTML = `<p class="font-black text-base md:text-lg uppercase tracking-widest text-zinc-100">Guomao Store</p><p class="text-[11px] md:text-[13px] text-zinc-500 font-bold">Suite 0256, Building B, Chao Wai SOHO</p>`;
-                document.getElementById('addr-slt').innerHTML = `<p class="font-black text-base md:text-lg uppercase tracking-widest text-zinc-100">Sanlitun Store</p><p class="text-[11px] md:text-[13px] text-zinc-500 font-bold">4th Floor Atrium, Shimao Gongsan</p>`;
-                document.getElementById('scan-text').innerText = "Scan to Book";
-                document.getElementById('join-text').innerHTML = "Join<br/>Now";
-            }
-            renderDesktop();
-            renderMobile();
-        }
-
-        // 监听窗口大小变化
-        window.addEventListener('resize', () => {
-            setLanguage(currentLang);
-        });
-
-        setLanguage('zh');
+        render();
     </script>
 </body>
 </html>
