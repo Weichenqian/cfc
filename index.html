@@ -19,13 +19,14 @@
         .slot-card {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .slot-card:hover {
-            transform: translateY(-8px);
-            filter: brightness(1.1);
-        }
-        /* 确保品牌区域宽度稳定，防止中英文切换时布局抖动 */
-        .header-brand-container {
-            min-width: 480px;
+        @media (min-width: 768px) {
+            .slot-card:hover {
+                transform: translateY(-8px);
+                filter: brightness(1.1);
+            }
+            .header-brand-container {
+                min-width: 480px;
+            }
         }
     </style>
 </head>
@@ -34,62 +35,69 @@
     <div class="min-h-screen p-4 md:p-8 max-w-[1400px] mx-auto">
         
         <!-- Header -->
-        <header class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-8">
-            <div class="header-brand-container space-y-6 flex flex-col items-start">
-                <div class="h-20 md:h-28 flex items-center justify-start">
+        <header class="flex flex-col md:flex-row justify-between items-center md:items-end mb-8 md:mb-12 gap-8 text-center md:text-left">
+            <div class="header-brand-container space-y-4 md:space-y-6 flex flex-col items-center md:items-start w-full md:w-auto">
+                <div class="h-16 md:h-28 flex items-center justify-center md:justify-start">
                     <img src="Capital-Fight-Club-logo2.png" alt="Logo" class="h-full w-auto logo-filter object-contain">
                 </div>
-                <!-- 初始状态：中文使用较大的 letter-spacing 以对齐英文长度 -->
-                <div id="slogan" class="text-[11px] font-black underline decoration-red-600 decoration-2 underline-offset-8 tracking-[1.95em] text-zinc-400 uppercase whitespace-nowrap transition-all duration-300">
+                <div id="slogan" class="text-[9px] md:text-[11px] font-black underline decoration-red-600 decoration-2 underline-offset-8 tracking-[1.95em] text-zinc-400 uppercase whitespace-nowrap transition-all duration-300">
                     拳击 · 泰拳 · 实战
                 </div>
             </div>
 
-            <div class="flex flex-col items-end gap-5">
+            <div class="flex flex-col items-center md:items-end gap-5 w-full md:w-auto">
                 <!-- Language Switcher -->
                 <div class="flex bg-zinc-800 p-1 rounded-full border border-zinc-700 shadow-inner">
-                    <button onclick="setLanguage('zh')" id="btn-zh" class="px-6 py-2 rounded-full text-xs font-black transition-all bg-red-600 text-white shadow-lg scale-105">中文</button>
-                    <button onclick="setLanguage('en')" id="btn-en" class="px-6 py-2 rounded-full text-xs font-black transition-all text-zinc-400 hover:text-white">EN</button>
+                    <button onclick="setLanguage('zh')" id="btn-zh" class="px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-black transition-all bg-red-600 text-white shadow-lg scale-105">中文</button>
+                    <button onclick="setLanguage('en')" id="btn-en" class="px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-black transition-all text-zinc-400 hover:text-white">EN</button>
                 </div>
                 
                 <!-- Legend -->
-                <div class="flex gap-8">
-                    <div class="flex items-center gap-3">
-                        <div class="w-4 h-4 bg-red-600 rounded-sm shadow-[0_0_12px_rgba(220,38,38,0.5)]"></div>
-                        <span id="legend-gm" class="text-[12px] font-black uppercase tracking-widest text-zinc-200">国贸店</span>
+                <div class="flex gap-6 md:gap-8">
+                    <div class="flex items-center gap-2 md:gap-3">
+                        <div class="w-3 h-3 md:w-4 md:h-4 bg-red-600 rounded-sm shadow-[0_0_12px_rgba(220,38,38,0.5)]"></div>
+                        <span id="legend-gm" class="text-[10px] md:text-[12px] font-black uppercase tracking-widest text-zinc-200">国贸店</span>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-4 h-4 bg-blue-600 rounded-sm shadow-[0_0_12px_rgba(37,99,235,0.5)]"></div>
-                        <span id="legend-slt" class="text-[12px] font-black uppercase tracking-widest text-zinc-200">三里屯店</span>
+                    <div class="flex items-center gap-2 md:gap-3">
+                        <div class="w-3 h-3 md:w-4 md:h-4 bg-blue-600 rounded-sm shadow-[0_0_12px_rgba(37,99,235,0.5)]"></div>
+                        <span id="legend-slt" class="text-[10px] md:text-[12px] font-black uppercase tracking-widest text-zinc-200">三里屯店</span>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- Schedule Grid Container -->
-        <div class="overflow-x-auto rounded-[2.5rem] border border-zinc-800 bg-zinc-900/40 backdrop-blur-xl shadow-2xl scrollbar-hide">
-            <div class="min-w-[1100px] p-8">
-                <div id="schedule-grid" class="grid grid-cols-[100px_repeat(7,1fr)] gap-4">
-                    <!-- JS will inject grid content here -->
+        <!-- Main Content Area -->
+        <div id="schedule-container" class="rounded-[1.5rem] md:rounded-[2.5rem] border border-zinc-800 bg-zinc-900/40 backdrop-blur-xl shadow-2xl overflow-hidden">
+            <!-- Desktop Grid (Hidden on Mobile) -->
+            <div class="hidden md:block overflow-x-auto scrollbar-hide">
+                <div class="min-w-[1100px] p-8">
+                    <div id="schedule-grid-desktop" class="grid grid-cols-[100px_repeat(7,1fr)] gap-4">
+                        <!-- JS Desktop Content -->
+                    </div>
                 </div>
+            </div>
+
+            <!-- Mobile List (Hidden on Desktop) -->
+            <div class="block md:hidden p-4 space-y-8" id="schedule-list-mobile">
+                <!-- JS Mobile Content -->
             </div>
         </div>
 
         <!-- Footer -->
-        <footer class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center p-10 bg-zinc-900/80 rounded-[4rem] border border-zinc-800">
-            <div class="space-y-6">
-                <div class="flex items-center gap-6">
-                    <div class="w-2 h-14 bg-red-600 rounded-full shadow-[0_0_15px_#dc2626]"></div>
+        <footer class="mt-8 md:mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center p-6 md:p-10 bg-zinc-900/80 rounded-[2rem] md:rounded-[4rem] border border-zinc-800">
+            <div class="space-y-4 md:space-y-6">
+                <div class="flex items-center gap-4 md:gap-6">
+                    <div class="w-1.5 h-10 md:w-2 md:h-14 bg-red-600 rounded-full shadow-[0_0_15px_#dc2626]"></div>
                     <div id="addr-gm">
-                        <p class="font-black text-lg uppercase tracking-widest text-zinc-100">国贸店 (朝外SOHO)</p>
-                        <p class="text-[13px] text-zinc-500 font-bold">朝外SOHO B座 0256</p>
+                        <p class="font-black text-base md:text-lg uppercase tracking-widest text-zinc-100">国贸店 (朝外SOHO)</p>
+                        <p class="text-[11px] md:text-[13px] text-zinc-500 font-bold">朝外SOHO B座 0256</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-6">
-                    <div class="w-2 h-14 bg-blue-600 rounded-full shadow-[0_0_15px_#2563eb]"></div>
+                <div class="flex items-center gap-4 md:gap-6">
+                    <div class="w-1.5 h-10 md:w-2 md:h-14 bg-blue-600 rounded-full shadow-[0_0_15px_#2563eb]"></div>
                     <div id="addr-slt">
-                        <p class="font-black text-lg uppercase tracking-widest text-zinc-100">三里屯店 (世茂工三)</p>
-                        <p class="text-[13px] text-zinc-500 font-bold">世茂工三 4层中庭</p>
+                        <p class="font-black text-base md:text-lg uppercase tracking-widest text-zinc-100">三里屯店 (世茂工三)</p>
+                        <p class="text-[11px] md:text-[13px] text-zinc-500 font-bold">世茂工三 4层中庭</p>
                     </div>
                 </div>
             </div>
@@ -100,12 +108,12 @@
                 </p>
             </div>
 
-            <div class="flex items-center justify-end gap-8 bg-black/60 p-6 rounded-[3.5rem] border border-white/5">
+            <div class="flex items-center justify-between md:justify-end gap-4 md:gap-8 bg-black/60 p-4 md:p-6 rounded-[2rem] md:rounded-[3.5rem] border border-white/5">
                 <div class="text-right">
-                    <p id="scan-text" class="text-[11px] font-black text-red-600 uppercase tracking-[0.4em] mb-2">扫码预约</p>
-                    <p id="join-text" class="text-3xl font-black leading-none uppercase italic tracking-tighter">立即<br/>报名</p>
+                    <p id="scan-text" class="text-[9px] md:text-[11px] font-black text-red-600 uppercase tracking-[0.4em] mb-1 md:mb-2">扫码预约</p>
+                    <p id="join-text" class="text-2xl md:text-3xl font-black leading-none uppercase italic tracking-tighter">立即<br/>报名</p>
                 </div>
-                <div class="bg-white p-1.5 rounded-2xl w-28 h-28 shadow-2xl flex items-center justify-center overflow-hidden">
+                <div class="bg-white p-1 rounded-xl md:rounded-2xl w-20 h-20 md:w-28 md:h-28 shadow-2xl flex items-center justify-center overflow-hidden">
                     <img src="Scan-to-Book.jpg" alt="QR" class="w-full h-full object-contain">
                 </div>
             </div>
@@ -158,8 +166,8 @@
             {
                 timeDisplay: "18:30",
                 slots: [
-                    { type: 'guomao', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team' },
-                    { type: 'guomao', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson' },
+                    { type: 'guomao', name: { zh: '泰拳', en: 'Muay Thai' }, coach: 'Thai Team', actualTime: "18:30" },
+                    { type: 'guomao', name: { zh: '拳击', en: 'Boxing' }, coach: 'Jerson', actualTime: "18:30" },
                     null, null, null, null, null
                 ]
             },
@@ -189,9 +197,10 @@
             }
         ];
 
-        function renderGrid() {
-            const grid = document.getElementById('schedule-grid');
+        function renderDesktop() {
+            const grid = document.getElementById('schedule-grid-desktop');
             grid.innerHTML = '';
+            
             const label = document.createElement('div');
             label.className = "flex items-center justify-center text-[10px] font-black text-zinc-600 tracking-tighter uppercase";
             label.innerText = "Schedule";
@@ -216,26 +225,7 @@
                     const cellContainer = document.createElement('div');
                     cellContainer.className = "min-h-[145px]";
                     if (cell) {
-                        const bgClass = cell.type === 'guomao' ? 'from-red-600 to-red-700' : 'from-blue-600 to-blue-700';
-                        const timeBadgeClass = cell.type === 'guomao' ? 'bg-red-900/40 text-red-200' : 'bg-blue-900/40 text-blue-200';
-                        
-                        cellContainer.innerHTML = `
-                            <div class="h-full p-5 rounded-2xl flex flex-col justify-between slot-card border border-white/10 shadow-lg bg-gradient-to-br ${bgClass} relative overflow-hidden">
-                                <div>
-                                    <div class="flex justify-between items-start mb-3 gap-1">
-                                        ${cell.actualTime ? `<span class="px-2.5 py-1 rounded-md ${timeBadgeClass} text-[11px] font-black italic border border-white/10 ring-2 ring-black/10">${cell.actualTime}</span>` : '<span></span>'}
-                                        ${cell.tag ? `<span class="inline-block px-2.5 py-1 rounded-md bg-black/30 text-[9px] font-black uppercase tracking-widest">${currentLang === 'zh' ? cell.tag.zh : cell.tag.en}</span>` : '<span></span>'}
-                                    </div>
-                                    <div class="font-black text-xl leading-tight tracking-tight">
-                                        ${currentLang === 'zh' ? cell.name.zh : cell.name.en}
-                                        ${cell.note ? `<span class="text-[10px] block mt-1 font-black opacity-60 italic">${cell.note}</span>` : ''}
-                                    </div>
-                                </div>
-                                <div class="text-[11px] font-black uppercase border-t border-white/20 pt-3 opacity-95 tracking-wider">
-                                    ${cell.coach}
-                                </div>
-                            </div>
-                        `;
+                        cellContainer.innerHTML = createCourseCard(cell);
                     } else {
                         cellContainer.innerHTML = `<div class="h-full rounded-2xl border border-zinc-800/40 bg-zinc-950/40"></div>`;
                     }
@@ -244,45 +234,110 @@
             });
         }
 
+        function renderMobile() {
+            const list = document.getElementById('schedule-list-mobile');
+            list.innerHTML = '';
+
+            DAYS.forEach((day, dayIndex) => {
+                const daySection = document.createElement('div');
+                daySection.className = "space-y-4";
+                
+                const isWeekend = dayIndex >= 5;
+                const dayTitle = document.createElement('div');
+                dayTitle.className = `text-lg font-black tracking-[0.2em] border-b-2 pb-2 ${isWeekend ? 'text-red-500 border-red-500/30' : 'text-white border-white/10'}`;
+                dayTitle.innerText = currentLang === 'zh' ? day.zh : day.en;
+                daySection.appendChild(dayTitle);
+
+                let hasClass = false;
+                SCHEDULE_DATA.forEach(row => {
+                    const cell = row.slots[dayIndex];
+                    if (cell) {
+                        hasClass = true;
+                        const cardWrapper = document.createElement('div');
+                        cardWrapper.className = "w-full";
+                        cardWrapper.innerHTML = createCourseCard(cell, true);
+                        daySection.appendChild(cardWrapper);
+                    }
+                });
+
+                if (!hasClass) {
+                    const noClass = document.createElement('div');
+                    noClass.className = "text-zinc-600 italic text-sm py-2";
+                    noClass.innerText = currentLang === 'zh' ? "暂无课程" : "No Classes";
+                    daySection.appendChild(noClass);
+                }
+
+                list.appendChild(daySection);
+            });
+        }
+
+        function createCourseCard(cell, isMobile = false) {
+            const bgClass = cell.type === 'guomao' ? 'from-red-600 to-red-700' : 'from-blue-600 to-blue-700';
+            const timeBadgeClass = cell.type === 'guomao' ? 'bg-red-900/40 text-red-200' : 'bg-blue-900/40 text-blue-200';
+            
+            return `
+                <div class="h-full ${isMobile ? 'p-4' : 'p-5'} rounded-2xl flex flex-col justify-between slot-card border border-white/10 shadow-lg bg-gradient-to-br ${bgClass} relative overflow-hidden">
+                    <div>
+                        <div class="flex justify-between items-start mb-3 gap-1">
+                            ${cell.actualTime ? `<span class="px-2.5 py-1 rounded-md ${timeBadgeClass} text-[11px] font-black italic border border-white/10 ring-2 ring-black/10">${cell.actualTime}</span>` : '<span></span>'}
+                            ${cell.tag ? `<span class="inline-block px-2.5 py-1 rounded-md bg-black/30 text-[9px] font-black uppercase tracking-widest">${currentLang === 'zh' ? cell.tag.zh : cell.tag.en}</span>` : '<span></span>'}
+                        </div>
+                        <div class="font-black ${isMobile ? 'text-lg' : 'text-xl'} leading-tight tracking-tight">
+                            ${currentLang === 'zh' ? cell.name.zh : cell.name.en}
+                            ${cell.note ? `<span class="text-[10px] block mt-1 font-black opacity-60 italic">${cell.note}</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="text-[11px] font-black uppercase border-t border-white/20 pt-3 mt-3 opacity-95 tracking-wider">
+                        ${cell.coach}
+                    </div>
+                </div>
+            `;
+        }
+
         function setLanguage(lang) {
             currentLang = lang;
             const btnZh = document.getElementById('btn-zh');
             const btnEn = document.getElementById('btn-en');
             const slogan = document.getElementById('slogan');
             
+            // 针对移动端优化字间距
+            const isMobile = window.innerWidth < 768;
+
             if (lang === 'zh') {
-                btnZh.className = "px-6 py-2 rounded-full text-xs font-black transition-all bg-red-600 text-white shadow-lg scale-105";
-                btnEn.className = "px-6 py-2 rounded-full text-xs font-black transition-all text-zinc-400 hover:text-white";
+                btnZh.className = "px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-black transition-all bg-red-600 text-white shadow-lg scale-105";
+                btnEn.className = "px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-black transition-all text-zinc-400 hover:text-white";
                 slogan.innerText = "拳击 · 泰拳 · 实战";
-                // 调整中文间距，使其物理宽度与英文对齐
-                slogan.style.letterSpacing = "1.95em";
-                slogan.style.paddingRight = "0";
+                slogan.style.letterSpacing = isMobile ? "1.2em" : "1.95em";
                 
                 document.getElementById('legend-gm').innerText = "国贸店";
                 document.getElementById('legend-slt').innerText = "三里屯店";
-                document.getElementById('addr-gm').innerHTML = `<p class="font-black text-lg uppercase tracking-widest text-zinc-100">国贸店 (朝外SOHO)</p><p class="text-[13px] text-zinc-500 font-bold">朝外SOHO B座 0256</p>`;
-                document.getElementById('addr-slt').innerHTML = `<p class="font-black text-lg uppercase tracking-widest text-zinc-100">三里屯店 (世茂工三)</p><p class="text-[13px] text-zinc-500 font-bold">世茂工三 4层中庭</p>`;
+                document.getElementById('addr-gm').innerHTML = `<p class="font-black text-base md:text-lg uppercase tracking-widest text-zinc-100">国贸店 (朝外SOHO)</p><p class="text-[11px] md:text-[13px] text-zinc-500 font-bold">朝外SOHO B座 0256</p>`;
+                document.getElementById('addr-slt').innerHTML = `<p class="font-black text-base md:text-lg uppercase tracking-widest text-zinc-100">三里屯店 (世茂工三)</p><p class="text-[11px] md:text-[13px] text-zinc-500 font-bold">世茂工三 4层中庭</p>`;
                 document.getElementById('scan-text').innerText = "扫码预约";
                 document.getElementById('join-text').innerHTML = "立即<br/>报名";
             } else {
-                btnEn.className = "px-6 py-2 rounded-full text-xs font-black transition-all bg-red-600 text-white shadow-lg scale-105";
-                btnZh.className = "px-6 py-2 rounded-full text-xs font-black transition-all text-zinc-400 hover:text-white";
+                btnEn.className = "px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-black transition-all bg-red-600 text-white shadow-lg scale-105";
+                btnZh.className = "px-5 md:px-6 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-black transition-all text-zinc-400 hover:text-white";
                 slogan.innerText = "BOXING · MUAY THAI · SPARRING";
-                // 英文恢复标准较小的间距
-                slogan.style.letterSpacing = "0.5em";
-                slogan.style.paddingRight = "0";
+                slogan.style.letterSpacing = isMobile ? "0.3em" : "0.5em";
 
                 document.getElementById('legend-gm').innerText = "Guomao";
                 document.getElementById('legend-slt').innerText = "Sanlitun";
-                document.getElementById('addr-gm').innerHTML = `<p class="font-black text-lg uppercase tracking-widest text-zinc-100">Guomao Store</p><p class="text-[13px] text-zinc-500 font-bold">Suite 0256, Building B, Chao Wai SOHO</p>`;
-                document.getElementById('addr-slt').innerHTML = `<p class="font-black text-lg uppercase tracking-widest text-zinc-100">Sanlitun Store</p><p class="text-[13px] text-zinc-500 font-bold">4th Floor Atrium, Shimao Gongsan</p>`;
+                document.getElementById('addr-gm').innerHTML = `<p class="font-black text-base md:text-lg uppercase tracking-widest text-zinc-100">Guomao Store</p><p class="text-[11px] md:text-[13px] text-zinc-500 font-bold">Suite 0256, Building B, Chao Wai SOHO</p>`;
+                document.getElementById('addr-slt').innerHTML = `<p class="font-black text-base md:text-lg uppercase tracking-widest text-zinc-100">Sanlitun Store</p><p class="text-[11px] md:text-[13px] text-zinc-500 font-bold">4th Floor Atrium, Shimao Gongsan</p>`;
                 document.getElementById('scan-text').innerText = "Scan to Book";
                 document.getElementById('join-text').innerHTML = "Join<br/>Now";
             }
-            renderGrid();
+            renderDesktop();
+            renderMobile();
         }
 
-        renderGrid();
+        // 监听窗口大小变化
+        window.addEventListener('resize', () => {
+            setLanguage(currentLang);
+        });
+
+        setLanguage('zh');
     </script>
 </body>
 </html>
