@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFC价格体系Price List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glass-card {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-guomao { border-left: 6px solid #dc2626; }
+        .card-guomao:hover {
+            border-color: #ef4444;
+            background: rgba(220, 38, 38, 0.05);
+            box-shadow: 0 0 50px rgba(220, 38, 38, 0.15);
+        }
+
+        .card-sanlitun { border-left: 6px solid #2563eb; }
+        .card-sanlitun:hover {
+            border-color: #3b82f6;
+            background: rgba(37, 99, 235, 0.05);
+            box-shadow: 0 0 50px rgba(37, 99, 235, 0.15);
+        }
+
+        .eng-sub {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .price-unit {
+            font-size: 13px;
+            color: #a1a1aa; /* zinc-400 */
+            font-weight: 600;
+        }
+
+        .zh-title {
+            letter-spacing: 0.05em;
+        }
+
+        .text-shadow-strong {
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center min-h-screen pb-20">
+
+    <!-- 头部区域 -->
+    <header class="w-full max-w-6xl px-6 py-16 flex flex-col items-center text-center">
+        <div class="mb-10">
+            <img src="Capital-Fight-Club-logo2.png" alt="CFC Logo" class="h-20 md:h-28 invert brightness-200">
+        </div>
+        
+        <div class="mb-12">
+            <div class="flex items-center justify-center gap-6 mb-6">
+                <span class="h-[2px] w-16 bg-red-600"></span>
+                <p class="font-black text-white tracking-[0.3em] text-lg md:text-xl">
+                    拳击 · 泰拳 · 实战
+                </p>
+                <span class="h-[2px] w-16 bg-blue-600"></span>
+            </div>
+            <h3 class="text-4xl md:text-6xl font-black italic eng-sub leading-tight">
+                每一次挥拳，都在改变<br/>
+                <span class="text-zinc-400 text-2xl md:text-3xl mt-2 block tracking-widest uppercase">Every Punch Changes You</span>
+            </h3>
+        </div>
+        
+        <!-- 标签系统 -->
+        <div class="flex flex-wrap justify-center gap-4 text-xs md:text-sm font-black">
+            <span class="px-6 py-3 border border-zinc-700 rounded-full text-zinc-300 bg-white/5 uppercase"># 零基础友好 Beginner Friendly</span>
+            <span class="px-6 py-3 border border-zinc-700 rounded-full text-zinc-300 bg-white/5 uppercase"># 职业级教练 Pro Coaches</span>
+            <span class="px-6 py-3 border border-zinc-700 rounded-full text-white bg-zinc-800 shadow-xl uppercase"># 国际化社区 International</span>
+        </div>
+    </header>
+
+    <!-- 价格内容区域 -->
+    <main class="w-full max-w-7xl px-6 mb-12 flex flex-col gap-12">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- 国贸店 -->
+            <div class="glass-card card-guomao rounded-[3rem] p-12 relative overflow-hidden flex flex-col shadow-2xl">
+                <div class="absolute -top-10 -right-10 w-64 h-64 bg-red-600/10 rounded-full blur-[80px]"></div>
+                
+                <div class="mb-12 relative z-10">
+                    <span class="text-xs bg-red-600 px-3 py-1 rounded-sm text-white font-black uppercase mb-3 inline-block eng-sub">Guomao Central</span>
+                    <h2 class="text-5xl font-black italic text-white zh-title">国贸中心店</h2>
+                </div>
+
+                <div class="space-y-14 relative z-10">
+                    <!-- 周期会员 -->
+                    <section>
+                        <div class="flex items-center mb-10 text-xs text-red-500 font-black uppercase tracking-[0.2em] eng-sub">
+                            <span>Membership / 周期会员</span>
+                            <div class="h-[1px] flex-grow ml-6 bg-red-900/50"></div>
+                        </div>
+                        <div class="space-y-8">
+                            <div class="flex justify-between items-end border-b border-white/10 pb-6">
+                                <div>
+                                    <div class="text-2xl font-black">季卡 <span class="text-sm font-bold text-zinc-400 ml-3 uppercase italic eng-sub">Quarterly</span></div>
+                                    <div class="price-unit mt-2">约 ¥1,500/月 (Avg. Monthly)</div>
+                                </div>
+                                <span class="text-4xl font-black price-number">¥4,500</span>
+                            </div>
+                            <div class="flex justify-between items-end border-b border-white/10 pb-6">
+                                <div>
+                                    <div class="text-2xl font-black">半年卡 <span class="text-sm font-bold text-zinc-400 ml-3 uppercase italic eng-sub">Semi-Annual</span></div>
+                                    <div class="price-unit mt-2">约 ¥1,250/月 (Avg. Monthly)</div>
+                                </div>
+                                <span class="text-4xl font-black price-number">¥7,500</span>
+                            </div>
+                            <!-- 重点推荐年卡 -->
+                            <div class="bg-red-600 p-8 rounded-[2rem] flex justify-between items-center shadow-2xl shadow-red-900/50 transform hover:scale-[1.03] transition-all">
+                                <div>
+                                    <div class="text-3xl font-black italic text-white zh-title text-shadow-strong">至尊年卡</div>
+                                    <div class="text-xs text-white/90 font-bold uppercase mt-2 eng-sub">Annual Membership / ¥1,150 Monthly</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-5xl font-black text-shadow-strong">¥13,800</div>
+                                    <div class="text-[11px] bg-white text-red-600 px-3 py-1 rounded-full inline-block mt-3 font-black">BEST VALUE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 灵活次卡 -->
+                    <section>
+                        <div class="flex items-center mb-10 text-xs text-red-500 font-black uppercase tracking-[0.2em] eng-sub">
+                            <span>Punch Cards / 灵活次卡</span>
+                            <div class="h-[1px] flex-grow ml-6 bg-red-900/50"></div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-5">
+                            <div class="bg-white/5 p-6 rounded-3xl text-center border border-white/10">
+                                <p class="text-[11px] text-zinc-400 font-black uppercase eng-sub">20 Sessions</p>
+                                <p class="text-2xl font-black italic mt-2 text-white">¥2,888</p>
+                                <p class="text-xs text-zinc-400 mt-2 font-bold">¥144/次</p>
+                            </div>
+                            <div class="bg-white/5 p-6 rounded-3xl text-center border border-white/10">
+                                <p class="text-[11px] text-zinc-400 font-black uppercase eng-sub">50 Sessions</p>
+                                <p class="text-2xl font-black italic mt-2 text-white">¥6,800</p>
+                                <p class="text-xs text-zinc-400 mt-2 font-bold">¥136/次</p>
+                            </div>
+                            <div class="bg-red-600/20 p-6 rounded-3xl text-center border-2 border-red-600/60">
+                                <p class="text-[11px] text-red-500 font-black uppercase eng-sub">100 Sessions</p>
+                                <p class="text-2xl font-black italic mt-2 text-white text-shadow-strong">¥12,000</p>
+                                <p class="text-xs text-red-400 mt-2 font-black">¥120/次</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- 三里屯店 -->
+            <div class="glass-card card-sanlitun rounded-[3rem] p-12 relative overflow-hidden flex flex-col shadow-2xl">
+                <div class="absolute -top-10 -right-10 w-64 h-64 bg-blue-600/10 rounded-full blur-[80px]"></div>
+
+                <div class="mb-12 relative z-10">
+                    <span class="text-xs bg-blue-600 px-3 py-1 rounded-sm text-white font-black uppercase mb-3 inline-block eng-sub">Sanlitun Store</span>
+                    <h2 class="text-5xl font-black italic text-white zh-title">三里屯店</h2>
+                </div>
+
+                <div class="space-y-14 relative z-10">
+                    <section>
+                        <div class="flex items-center mb-10 text-xs text-blue-500 font-black uppercase tracking-[0.2em] eng-sub">
+                            <span>Membership / 周期会员</span>
+                            <div class="h-[1px] flex-grow ml-6 bg-blue-900/50"></div>
+                        </div>
+                        <div class="space-y-8">
+                            <div class="flex justify-between items-end border-b border-white/10 pb-6">
+                                <div>
+                                    <div class="text-2xl font-black">季卡 <span class="text-sm font-bold text-zinc-400 ml-3 uppercase italic eng-sub">Quarterly</span></div>
+                                    <div class="price-unit mt-2">约 ¥1,200/月 (Avg. Monthly)</div>
+                                </div>
+                                <span class="text-4xl font-black">¥3,600</span>
+                            </div>
+                            <div class="flex justify-between items-end border-b border-white/10 pb-6">
+                                <div>
+                                    <div class="text-2xl font-black">半年卡 <span class="text-sm font-bold text-zinc-400 ml-3 uppercase italic eng-sub">Semi-Annual</span></div>
+                                    <div class="price-unit mt-2">约 ¥1,000/月 (Avg. Monthly)</div>
+                                </div>
+                                <span class="text-4xl font-black">¥5,999</span>
+                            </div>
+                            <div class="bg-blue-600 p-8 rounded-[2rem] flex justify-between items-center shadow-2xl shadow-blue-900/50 transform hover:scale-[1.03] transition-all">
+                                <div>
+                                    <div class="text-3xl font-black italic text-white zh-title text-shadow-strong">性价比年卡</div>
+                                    <div class="text-xs text-white/90 font-bold uppercase mt-2 eng-sub">Best Deal / ¥833 Monthly</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-5xl font-black text-shadow-strong">¥9,999</div>
+                                    <div class="text-[11px] bg-white text-blue-600 px-3 py-1 rounded-full inline-block mt-3 font-black">BEST DEAL</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="flex items-center mb-10 text-xs text-blue-500 font-black uppercase tracking-[0.2em] eng-sub">
+                            <span>Punch Cards / 灵活次卡</span>
+                            <div class="h-[1px] flex-grow ml-6 bg-blue-900/50"></div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-5">
+                            <div class="bg-white/5 p-6 rounded-3xl text-center border border-white/10">
+                                <p class="text-[11px] text-zinc-400 font-black uppercase eng-sub">20 Sessions</p>
+                                <p class="text-2xl font-black italic mt-2 text-white">¥1,999</p>
+                                <p class="text-xs text-zinc-400 mt-2 font-bold">¥99/次</p>
+                            </div>
+                            <div class="bg-white/5 p-6 rounded-3xl text-center border border-white/10 opacity-40">
+                                <p class="text-[11px] text-zinc-400 font-black uppercase eng-sub">50 Sessions</p>
+                                <p class="text-2xl font-black italic mt-2 text-white">- - -</p>
+                                <p class="text-xs text-zinc-400 mt-2 font-bold">Exclusive</p>
+                            </div>
+                            <div class="bg-blue-600/20 p-6 rounded-3xl text-center border-2 border-blue-600/60">
+                                <p class="text-[11px] text-blue-500 font-black uppercase eng-sub">100 Sessions</p>
+                                <p class="text-2xl font-black italic mt-2 text-white text-shadow-strong">¥8,888</p>
+                                <p class="text-xs text-blue-400 mt-2 font-black">¥88/次</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- 通用卡种 & 私教 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-4">
+            <!-- 全城通用 -->
+            <div class="glass-card rounded-[3rem] p-12 border border-white/10 bg-zinc-950">
+                <div class="flex items-center gap-8 mb-12">
+                    <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center text-black font-black italic text-2xl shadow-2xl">ALL</div>
+                    <div>
+                        <h3 class="text-3xl font-black italic uppercase eng-sub text-white">两店通用 · ALL ACCESS</h3>
+                        <p class="text-sm text-zinc-400 font-bold mt-2 zh-title tracking-wide">Train Wherever You Want / 通享顶级格斗空间</p>
+                    </div>
+                </div>
+                <div class="space-y-8">
+                    <div class="flex justify-between items-center p-8 bg-white/5 rounded-[2rem] border border-white/10">
+                        <span class="font-black text-xl">通用年卡 <span class="text-xs text-zinc-400 block font-bold mt-1">Annual / ¥1,233 Month</span></span>
+                        <span class="text-4xl font-black price-number">¥14,800</span>
+                    </div>
+                    <div class="flex justify-between items-center p-8 bg-white/5 rounded-[2rem] border border-white/10">
+                        <span class="font-black text-xl">通用100次卡 <span class="text-xs text-zinc-400 block font-bold mt-1">100 Sessions / ¥120 Per</span></span>
+                        <span class="text-4xl font-black price-number">¥12,000</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 私教定制 -->
+            <div class="glass-card rounded-[3rem] p-12 border border-white/10 flex flex-col justify-between bg-zinc-950/50">
+                <div>
+                    <h3 class="text-3xl font-black italic uppercase eng-sub mb-4 text-white">私教课程 · PERSONAL</h3>
+                    <p class="text-sm text-zinc-400 font-bold mb-12 zh-title tracking-wide">Perfect Every Punch Path / 打磨每一拳的极致轨迹</p>
+                </div>
+                <div class="space-y-10">
+                    <div class="flex justify-between items-center px-2">
+                        <span class="font-black text-xl">10节技术入门 <span class="text-xs text-zinc-400 block font-bold mt-1">Technical Intro / ¥650 Per</span></span>
+                        <span class="text-3xl font-black">¥6,500</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-red-600/10 p-8 rounded-[2rem] border-l-8 border-red-600">
+                        <span class="font-black text-xl text-red-500 uppercase">50节蜕变计划 <span class="text-xs text-red-900 block font-black eng-sub mt-1">Transformation / ¥500 Per</span></span>
+                        <span class="text-4xl font-black text-red-600 text-shadow-strong">¥25,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 底部区域 -->
+    <footer class="w-full max-w-7xl px-6 pt-24 border-t border-white/10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16 items-start text-center md:text-left">
+            <div>
+                <p class="text-xs text-red-600 font-black uppercase tracking-widest mb-6 italic eng-sub underline decoration-2 underline-offset-8">Guomao Store</p>
+                <p class="text-xl font-black mb-3 text-white zh-title">北京市朝阳区朝外大街<br/>朝外SOHO B座 2层 0256室</p>
+                <p class="text-xs text-zinc-400 font-bold italic leading-relaxed">Rooms 0256 & 0220, 2nd Floor, Tower B, Chaowai SOHO, Beijing</p>
+            </div>
+            <div>
+                <p class="text-xs text-blue-600 font-black uppercase tracking-widest mb-6 italic eng-sub underline decoration-2 underline-offset-8">Sanlitun Store</p>
+                <p class="text-xl font-black mb-3 text-white zh-title">北京市朝阳区工体北路<br/>世茂工三4层中庭</p>
+                <p class="text-xs text-zinc-400 font-bold italic leading-relaxed">4th Floor, Shimao Gongsan, Sanlitun, Chaoyang District, Beijing</p>
+            </div>
+            <div class="flex flex-col items-center md:items-end">
+                <div class="bg-white p-2 rounded-xl w-40 h-40 shadow-2xl shadow-white/10 transform rotate-1">
+                    <img src="Scan-to-Book.jpg" alt="CFC Booking QR" class="w-full h-full object-contain">
+                </div>
+                <p class="text-xs text-zinc-300 mt-6 font-black tracking-[0.2em] uppercase italic eng-sub">Scan to Book / 扫码预约课程</p>
+            </div>
+        </div>
+        <div class="mt-20 text-center text-[10px] text-zinc-600 font-black tracking-widest uppercase">
+            © 2024 CAPITAL FIGHT CLUB - ALL RIGHTS RESERVED
+        </div>
+    </footer>
+
+</body>
+</html>
