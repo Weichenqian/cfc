@@ -3,224 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CFC价格体系-视觉强化版</title>
+    <title>CFC价格体系</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             background-color: #050505;
-            color: #fff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            -webkit-font-smoothing: antialiased;
             margin: 0;
             padding: 0;
         }
 
         .glass-card {
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.02);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* 国贸店红色轮廓 */
+        /* 国贸店红色轮廓 - 强化对比 */
         .card-guomao {
-            background: rgba(220, 38, 38, 0.03);
-            border: 2px solid rgba(220, 38, 38, 0.2);
+            border: 2px solid rgba(220, 38, 38, 0.3);
         }
         .card-guomao:hover {
-            border-color: rgba(220, 38, 38, 0.6);
-            box-shadow: 0 0 30px rgba(220, 38, 38, 0.1);
+            border-color: rgba(220, 38, 38, 0.8);
+            background: rgba(220, 38, 38, 0.05);
+            box-shadow: 0 0 40px rgba(220, 38, 38, 0.15);
         }
 
-        /* 三里屯店蓝色轮廓 */
+        /* 三里屯店蓝色轮廓 - 强化对比 */
         .card-sanlitun {
-            background: rgba(37, 99, 235, 0.03);
-            border: 2px solid rgba(37, 99, 235, 0.2);
+            border: 2px solid rgba(37, 99, 235, 0.3);
         }
         .card-sanlitun:hover {
-            border-color: rgba(37, 99, 235, 0.6);
-            box-shadow: 0 0 30px rgba(37, 99, 235, 0.1);
+            border-color: rgba(37, 99, 235, 0.8);
+            background: rgba(37, 99, 235, 0.05);
+            box-shadow: 0 0 40px rgba(37, 99, 235, 0.15);
         }
 
         .eng-sub {
             font-family: 'Impact', 'Arial Black', sans-serif;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         .price-unit {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.4);
-            font-style: italic;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 500;
+        }
+
+        .zh-title {
+            letter-spacing: 0.05em;
         }
     </style>
 </head>
 <body class="flex flex-col items-center min-h-screen pb-12">
 
     <!-- 头部区域 -->
-    <header class="w-full max-w-6xl px-6 py-10 flex flex-col items-center text-center">
-        
-        <!-- LOGO 预留位置：请在下方 src 处替换您的 Logo 图片地址 -->
-        <div class="mb-6">
-          <img src="Capital-Fight-Club-logo2.png" alt="CFC Logo" class="h-16 md:h-20 invert brightness-200">
-        </div>
-        
-        <!-- 核心业务定位 (同步官网 Slogan) -->
+    <header class="w-full max-w-6xl px-6 py-12 flex flex-col items-center text-center">
+        <!-- Logo 区域 -->
         <div class="mb-8">
-            <div class="flex items-center justify-center gap-3 mt-2">
-                <span class="h-[1px] w-8 bg-zinc-800"></span>
-                <p class="eng-sub text-[10px] md:text-xs text-zinc-500 uppercase tracking-[0.3em]">搏击 · 泰拳 · 实战<br/>
-                boxing · Muay Thai · Sparring</p>
-                <span class="h-[1px] w-8 bg-zinc-800"></span>
-            </div>
-            <br/>
-             <h2 class="text-xl md:text-3xl font-black tracking-[0.4em] text-white italic">FIGHT FOR MORE</h2>
+            <img src="Capital-Fight-Club-logo2.png" alt="CFC Logo" class="h-16 md:h-24 invert brightness-200">
         </div>
         
-        <!-- 标签系统升级 -->
-        <div class="flex flex-wrap justify-center gap-3 text-[10px] md:text-xs font-bold italic uppercase">
-            <span class="px-4 py-1.5 border border-zinc-800 rounded-full text-zinc-400"># 零基础友好 Beginner Friendly</span>
-            <span class="px-4 py-1.5 border border-zinc-800 rounded-full text-zinc-400"># 职业级教练 Pro Coaches</span>
-            <span class="px-4 py-1.5 border border-zinc-800 rounded-full text-white bg-zinc-900"># 国际化社区 International Community</span>
-            <span class="px-4 py-1.5 border border-zinc-800 rounded-full text-zinc-400"># 专业格斗赛道 Pro Circuit</span>
+        <!-- 核心业务定位 -->
+        <div class="mb-10">
+            <div class="flex items-center justify-center gap-4 mb-4">
+                <span class="h-[1px] w-12 bg-zinc-800"></span>
+                <p class="font-bold text-zinc-400 tracking-[0.2em] text-sm md:text-base">
+                    搏击 · 泰拳 · 实战<br/>
+                    <span class="text-[10px] md:text-xs opacity-60 eng-sub">BOXING · MUAY THAI · SPARRING</span>
+                </p>
+                <span class="h-[1px] w-12 bg-zinc-800"></span>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-black tracking-[0.3em] text-white italic eng-sub">FIGHT FOR MORE</h2>
+        </div>
+        
+        <!-- 标签系统 -->
+        <div class="flex flex-wrap justify-center gap-3 text-[10px] md:text-xs font-bold uppercase">
+            <span class="px-4 py-2 border border-zinc-800 rounded-full text-zinc-400 bg-white/5"># 零基础友好 Beginner Friendly</span>
+            <span class="px-4 py-2 border border-zinc-800 rounded-full text-zinc-400 bg-white/5"># 职业级教练 Pro Coaches</span>
+            <span class="px-4 py-2 border border-zinc-800 rounded-full text-white bg-zinc-800 shadow-lg"># 国际化社区 International Community</span>
+            <span class="px-4 py-2 border border-zinc-800 rounded-full text-zinc-400 bg-white/5"># 专业格斗赛道 Pro Circuit</span>
         </div>
     </header>
 
     <!-- 价格内容区域 -->
-    <main class="w-full max-w-7xl px-6 mb-12 flex flex-col gap-8">
+    <main class="w-full max-w-7xl px-6 mb-12 flex flex-col gap-10">
         
-        <!-- 第一行：门店卡种 (颜色区分明显) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- 国贸店 (红色模块) -->
-            <div class="glass-card card-guomao rounded-[2rem] p-8 relative overflow-hidden flex flex-col">
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-red-600/10 rounded-full blur-3xl"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- 国贸店 -->
+            <div class="glass-card card-guomao rounded-[2.5rem] p-10 relative overflow-hidden flex flex-col shadow-2xl">
+                <div class="absolute -top-10 -right-10 w-48 h-48 bg-red-600/10 rounded-full blur-3xl"></div>
                 
-                <div class="mb-10 relative z-10">
-                    <span class="text-[10px] bg-red-600 px-2 py-0.5 rounded text-white font-bold uppercase mb-2 inline-block">Guomao Store</span>
-                    <h2 class="text-3xl font-black italic text-white">国贸中心店</h2>
+                <div class="mb-12 relative z-10 border-l-4 border-red-600 pl-6">
+                    <span class="text-[11px] bg-red-600 px-2 py-0.5 rounded text-white font-black uppercase mb-2 inline-block eng-sub">Guomao Central Store</span>
+                    <h2 class="text-4xl font-black italic text-white zh-title">国贸中心店</h2>
                 </div>
 
-                <div class="space-y-10 relative z-10">
+                <div class="space-y-12 relative z-10">
+                    <!-- 周期会员 -->
                     <section>
-                        <div class="flex items-center mb-6 text-[10px] text-red-500/70 font-bold italic uppercase tracking-widest">
+                        <div class="flex items-center mb-8 text-[11px] text-red-500 font-black uppercase tracking-widest eng-sub">
                             <span>Time-Based Membership / 周期会员</span>
-                            <div class="h-[1px] flex-grow ml-4 bg-red-900/30"></div>
+                            <div class="h-[1px] flex-grow ml-4 bg-red-900/40"></div>
                         </div>
-                        <div class="space-y-5">
-                            <div class="flex justify-between items-start">
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-end border-b border-white/5 pb-4">
                                 <div>
-                                    <div class="text-lg font-bold">季卡</div>
-                                    <div class="price-unit">约 ¥1,500/月</div>
+                                    <div class="text-xl font-bold">季卡 <span class="text-xs font-normal opacity-50 ml-2">Quarterly</span></div>
+                                    <div class="price-unit">约 ¥1,500/月 (Avg. Monthly)</div>
                                 </div>
-                                <span class="text-2xl font-bold">¥4,500</span>
+                                <span class="text-3xl font-black">¥4,500</span>
                             </div>
-                            <div class="flex justify-between items-start">
+                            <div class="flex justify-between items-end border-b border-white/5 pb-4">
                                 <div>
-                                    <div class="text-lg font-bold">半年卡</div>
-                                    <div class="price-unit">约 ¥1,250/月</div>
+                                    <div class="text-xl font-bold">半年卡 <span class="text-xs font-normal opacity-50 ml-2">Semi-Annual</span></div>
+                                    <div class="price-unit">约 ¥1,250/月 (Avg. Monthly)</div>
                                 </div>
-                                <span class="text-2xl font-bold">¥7,500</span>
+                                <span class="text-3xl font-black">¥7,500</span>
                             </div>
                             <!-- 重点推荐年卡 -->
-                            <div class="bg-red-600 p-5 rounded-2xl flex justify-between items-center shadow-lg shadow-red-900/20">
+                            <div class="bg-red-600 p-6 rounded-3xl flex justify-between items-center shadow-xl shadow-red-900/40 transform hover:scale-[1.02] transition-transform">
                                 <div>
-                                    <div class="text-xl font-black italic text-white">至尊年卡</div>
-                                    <div class="text-[10px] text-red-100 font-bold uppercase">最受推荐 · 约 ¥1,150/月</div>
+                                    <div class="text-2xl font-black italic text-white zh-title text-shadow-sm">至尊年卡</div>
+                                    <div class="text-[11px] text-red-100 font-bold uppercase eng-sub">Annual Membership / ¥1,150 Monthly</div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="text-3xl font-black">¥13,800</div>
-                                    <div class="text-[10px] bg-white/20 px-1 rounded inline-block mt-1">BEST VALUE</div>
+                                    <div class="text-4xl font-black">¥13,800</div>
+                                    <div class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full inline-block mt-1 font-bold">BEST VALUE</div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
+                    <!-- 灵活次卡 -->
                     <section>
-                        <div class="flex items-center mb-6 text-[10px] text-red-500/70 font-bold italic uppercase tracking-widest">
+                        <div class="flex items-center mb-8 text-[11px] text-red-500 font-black uppercase tracking-widest eng-sub">
                             <span>Session Passes / 灵活次卡</span>
-                            <div class="h-[1px] flex-grow ml-4 bg-red-900/30"></div>
+                            <div class="h-[1px] flex-grow ml-4 bg-red-900/40"></div>
                         </div>
-                        <div class="grid grid-cols-3 gap-3">
-                            <div class="border border-white/10 p-3 rounded-xl text-center">
-                                <p class="text-[10px] text-zinc-500">20次</p>
-                                <p class="text-lg font-bold italic">¥2,888</p>
-                                <p class="text-[9px] text-zinc-600">¥144/次</p>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-white/5 p-4 rounded-2xl text-center border border-white/5">
+                                <p class="text-[10px] text-zinc-500 font-bold">20 Sessions / 次</p>
+                                <p class="text-xl font-black italic mt-1 text-white">¥2,888</p>
+                                <p class="text-[10px] text-zinc-600 mt-1">¥144/次</p>
                             </div>
-                            <div class="border border-white/10 p-3 rounded-xl text-center">
-                                <p class="text-[10px] text-zinc-500">50次</p>
-                                <p class="text-lg font-bold italic">¥6,800</p>
-                                <p class="text-[9px] text-zinc-600">¥136/次</p>
+                            <div class="bg-white/5 p-4 rounded-2xl text-center border border-white/5">
+                                <p class="text-[10px] text-zinc-500 font-bold">50 Sessions / 次</p>
+                                <p class="text-xl font-black italic mt-1 text-white">¥6,800</p>
+                                <p class="text-[10px] text-zinc-600 mt-1">¥136/次</p>
                             </div>
-                            <div class="border-2 border-red-600/40 bg-red-600/5 p-3 rounded-xl text-center">
-                                <p class="text-[10px] text-red-500 font-bold">100次</p>
-                                <p class="text-lg font-black italic">¥12,000</p>
-                                <p class="text-[9px] text-red-400">¥120/次</p>
+                            <div class="bg-red-600/10 p-4 rounded-2xl text-center border-2 border-red-600/50">
+                                <p class="text-[10px] text-red-500 font-black">100 Sessions / 次</p>
+                                <p class="text-xl font-black italic mt-1 text-white">¥12,000</p>
+                                <p class="text-[10px] text-red-400 font-bold mt-1">¥120/次</p>
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
 
-            <!-- 三里屯店 (蓝色模块) -->
-            <div class="glass-card card-sanlitun rounded-[2rem] p-8 relative overflow-hidden flex flex-col">
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-600/10 rounded-full blur-3xl"></div>
+            <!-- 三里屯店 -->
+            <div class="glass-card card-sanlitun rounded-[2.5rem] p-10 relative overflow-hidden flex flex-col shadow-2xl">
+                <div class="absolute -top-10 -right-10 w-48 h-48 bg-blue-600/10 rounded-full blur-3xl"></div>
 
-                <div class="mb-10 relative z-10">
-                    <span class="text-[10px] bg-blue-600 px-2 py-0.5 rounded text-white font-bold uppercase mb-2 inline-block">Sanlitun Store</span>
-                    <h2 class="text-3xl font-black italic text-white">三里屯旗舰店</h2>
+                <div class="mb-12 relative z-10 border-l-4 border-blue-600 pl-6">
+                    <span class="text-[11px] bg-blue-600 px-2 py-0.5 rounded text-white font-black uppercase mb-2 inline-block eng-sub">Sanlitun Flagship Store</span>
+                    <h2 class="text-4xl font-black italic text-white zh-title">三里屯店</h2>
                 </div>
 
-                <div class="space-y-10 relative z-10">
+                <div class="space-y-12 relative z-10">
                     <section>
-                        <div class="flex items-center mb-6 text-[10px] text-blue-500/70 font-bold italic uppercase tracking-widest">
+                        <div class="flex items-center mb-8 text-[11px] text-blue-500 font-black uppercase tracking-widest eng-sub">
                             <span>Time-Based Membership / 周期会员</span>
-                            <div class="h-[1px] flex-grow ml-4 bg-blue-900/30"></div>
+                            <div class="h-[1px] flex-grow ml-4 bg-blue-900/40"></div>
                         </div>
-                        <div class="space-y-5">
-                            <div class="flex justify-between items-start">
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-end border-b border-white/5 pb-4">
                                 <div>
-                                    <div class="text-lg font-bold">季卡</div>
-                                    <div class="price-unit">约 ¥1,200/月</div>
+                                    <div class="text-xl font-bold">季卡 <span class="text-xs font-normal opacity-50 ml-2">Quarterly</span></div>
+                                    <div class="price-unit">约 ¥1,200/月 (Avg. Monthly)</div>
                                 </div>
-                                <span class="text-2xl font-bold">¥3,600</span>
+                                <span class="text-3xl font-black">¥3,600</span>
                             </div>
-                            <div class="flex justify-between items-start">
+                            <div class="flex justify-between items-end border-b border-white/5 pb-4">
                                 <div>
-                                    <div class="text-lg font-bold">半年卡</div>
-                                    <div class="price-unit">约 ¥1,000/月</div>
+                                    <div class="text-xl font-bold">半年卡 <span class="text-xs font-normal opacity-50 ml-2">Semi-Annual</span></div>
+                                    <div class="price-unit">约 ¥1,000/月 (Avg. Monthly)</div>
                                 </div>
-                                <span class="text-2xl font-bold">¥5,999</span>
+                                <span class="text-3xl font-black">¥5,999</span>
                             </div>
-                            <!-- 重点推荐年卡 -->
-                            <div class="bg-blue-600 p-5 rounded-2xl flex justify-between items-center shadow-lg shadow-blue-900/20">
+                            <div class="bg-blue-600 p-6 rounded-3xl flex justify-between items-center shadow-xl shadow-blue-900/40 transform hover:scale-[1.02] transition-transform">
                                 <div>
-                                    <div class="text-xl font-black italic text-white">性价比年卡</div>
-                                    <div class="text-[10px] text-blue-100 font-bold uppercase">超值首选 · 约 ¥833/月</div>
+                                    <div class="text-2xl font-black italic text-white zh-title">性价比年卡</div>
+                                    <div class="text-[11px] text-blue-100 font-bold uppercase eng-sub">Best Deal / ¥833 Monthly</div>
                                 </div>
                                 <div class="text-right">
-                                    <div class="text-3xl font-black">¥9,999</div>
-                                    <div class="text-[10px] bg-white/20 px-1 rounded inline-block mt-1">BEST DEAL</div>
+                                    <div class="text-4xl font-black">¥9,999</div>
+                                    <div class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full inline-block mt-1 font-bold">BEST DEAL</div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     <section>
-                        <div class="flex items-center mb-6 text-[10px] text-blue-500/70 font-bold italic uppercase tracking-widest">
+                        <div class="flex items-center mb-8 text-[11px] text-blue-500 font-black uppercase tracking-widest eng-sub">
                             <span>Session Passes / 灵活次卡</span>
-                            <div class="h-[1px] flex-grow ml-4 bg-blue-900/30"></div>
+                            <div class="h-[1px] flex-grow ml-4 bg-blue-900/40"></div>
                         </div>
-                        <div class="grid grid-cols-3 gap-3">
-                            <div class="border border-white/10 p-3 rounded-xl text-center">
-                                <p class="text-[10px] text-zinc-500">20次</p>
-                                <p class="text-lg font-bold italic">¥1,999</p>
-                                <p class="text-[9px] text-zinc-600">¥99/次</p>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-white/5 p-4 rounded-2xl text-center border border-white/5">
+                                <p class="text-[10px] text-zinc-500 font-bold">20 Sessions / 次</p>
+                                <p class="text-xl font-black italic mt-1 text-white">¥1,999</p>
+                                <p class="text-[10px] text-zinc-600 mt-1">¥99/次</p>
                             </div>
-                            <div class="border border-white/10 p-3 rounded-xl text-center">
-                                <p class="text-[10px] text-zinc-500">50次</p>
-                                <p class="text-lg font-bold italic">¥5,600</p>
-                                <p class="text-[9px] text-zinc-600">¥112/次</p>
+                            <div class="bg-white/5 p-4 rounded-2xl text-center border border-white/5">
+                                <p class="text-[10px] text-zinc-500 font-bold">50 Sessions / 次</p>
+                                <p class="text-xl font-black italic mt-1 text-white">¥5,600</p>
+                                <p class="text-[10px] text-zinc-600 mt-1">¥112/次</p>
                             </div>
-                            <div class="border-2 border-blue-600/40 bg-blue-600/5 p-3 rounded-xl text-center">
-                                <p class="text-[10px] text-blue-500 font-bold">100次</p>
-                                <p class="text-lg font-black italic">¥8,888</p>
-                                <p class="text-[9px] text-blue-400">¥88/次</p>
+                            <div class="bg-blue-600/10 p-4 rounded-2xl text-center border-2 border-blue-600/50">
+                                <p class="text-[10px] text-blue-500 font-black">100 Sessions / 次</p>
+                                <p class="text-xl font-black italic mt-1 text-white">¥8,888</p>
+                                <p class="text-[10px] text-blue-400 font-bold mt-1">¥88/次</p>
                             </div>
                         </div>
                     </section>
@@ -228,72 +235,73 @@
             </div>
         </div>
 
-        <!-- 通用卡种部分 -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- 全城通通 -->
-            <div class="glass-card rounded-[2rem] p-8 border border-white/10 bg-gradient-to-br from-zinc-900 to-black">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-black font-black italic text-xs">ALL</div>
+        <!-- 通用卡种 & 私教 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- 全城通用 -->
+            <div class="glass-card rounded-[2.5rem] p-10 border border-white/10 bg-gradient-to-br from-zinc-900 via-black to-zinc-900">
+                <div class="flex items-center gap-6 mb-10">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-black font-black italic text-xl shadow-lg shadow-white/10">ALL</div>
                     <div>
-                        <h3 class="text-xl font-black italic uppercase">两店通用 · ALL ACCESS</h3>
-                        <p class="text-[10px] text-zinc-500 font-bold">自由穿梭，不设限制</p>
+                        <h3 class="text-2xl font-black italic uppercase eng-sub text-white">两店通用 · ALL ACCESS</h3>
+                        <p class="text-xs text-zinc-400 font-bold zh-title">自由穿梭，不设限制 / Access All Branches</p>
                     </div>
                 </div>
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-2xl">
-                        <span class="font-bold text-white">通用年卡 <span class="text-[10px] text-zinc-600 block">约 ¥1,233/月</span></span>
-                        <span class="text-2xl font-black text-white">¥14,800</span>
+                <div class="space-y-6">
+                    <div class="flex justify-between items-center p-6 bg-white/5 rounded-3xl border border-white/5">
+                        <span class="font-bold text-lg">通用年卡 <span class="text-[11px] text-zinc-500 block font-normal">Annual / ¥1,233 Month</span></span>
+                        <span class="text-3xl font-black">¥14,800</span>
                     </div>
-                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-2xl">
-                        <span class="font-bold text-white">通用100次卡 <span class="text-[10px] text-zinc-600 block">¥120/次</span></span>
-                        <span class="text-2xl font-black text-white">¥12,000</span>
+                    <div class="flex justify-between items-center p-6 bg-white/5 rounded-3xl border border-white/5">
+                        <span class="font-bold text-lg">通用100次卡 <span class="text-[11px] text-zinc-500 block font-normal">100 Sessions / ¥120 Per</span></span>
+                        <span class="text-3xl font-black">¥12,000</span>
                     </div>
                 </div>
             </div>
 
             <!-- 私教定制 -->
-            <div class="glass-card rounded-[2rem] p-8 border border-white/10 flex flex-col justify-between bg-zinc-950/50">
+            <div class="glass-card rounded-[2.5rem] p-10 border border-white/10 flex flex-col justify-between bg-zinc-950/80">
                 <div>
-                    <h3 class="text-xl font-black italic uppercase mb-2">私教课程 · PRO PT</h3>
-                    <p class="text-[10px] text-zinc-500 font-bold mb-6">根据你的目标，定制每一拳的弧度</p>
+                    <h3 class="text-2xl font-black italic uppercase eng-sub mb-3 text-white">私教课程 · PRO PERSONAL</h3>
+                    <p class="text-xs text-zinc-500 font-bold mb-10 zh-title">定制每一拳的弧度 / Tailored Coaching Solutions</p>
                 </div>
-                <div class="space-y-4">
+                <div class="space-y-6">
                     <div class="flex justify-between items-center">
-                        <span class="font-bold">10节技术入门 <span class="text-[10px] text-zinc-600 block">¥650/节</span></span>
-                        <span class="text-xl font-bold">¥6,500</span>
+                        <span class="font-bold text-lg">10节技术入门 <span class="text-[11px] text-zinc-500 block font-normal">Intro Course / ¥650 Per</span></span>
+                        <span class="text-2xl font-black">¥6,500</span>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <span class="font-bold text-red-500 italic">50节蜕变计划 <span class="text-[10px] text-red-900 block font-bold">¥500/节 · 限时推荐</span></span>
-                        <span class="text-2xl font-black text-red-600">¥25,000</span>
+                    <div class="flex justify-between items-center bg-red-600/5 p-4 rounded-2xl border-l-4 border-red-600">
+                        <span class="font-bold text-lg text-red-500">50节蜕变计划 <span class="text-[11px] text-red-900 block font-black eng-sub underline">Transformation / ¥500 Per</span></span>
+                        <span class="text-3xl font-black text-red-600">¥25,000</span>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- 底部区域 (二维码已替换为官网图片地址) -->
-    <footer class="w-full max-w-7xl px-6 pt-20 border-t border-white/5">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start text-center md:text-left">
+    <!-- 底部区域 -->
+    <footer class="w-full max-w-7xl px-6 pt-20 border-t border-white/10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16 items-start text-center md:text-left">
             <div>
-                <p class="text-[10px] text-red-600 font-black uppercase tracking-widest mb-3 italic">Guomao Store</p>
-                <p class="text-lg font-black mb-1 text-white">朝外SOHO A座三层A-301</p>
-                <p class="text-xs text-zinc-600">3F, Tower A, Chaowai SOHO, Beijing</p>
+                <p class="text-[11px] text-red-600 font-black uppercase tracking-widest mb-4 italic eng-sub underline decoration-2">Guomao Store</p>
+                <p class="text-xl font-black mb-1 text-white zh-title">朝外SOHO A座三层A-301</p>
+                <p class="text-xs text-zinc-500 font-medium italic">3rd Floor, Tower A, Chaowai SOHO, Beijing</p>
+                <p class="mt-4 text-xs font-black text-zinc-300 eng-sub">Hotline: 010-8888-8888</p>
             </div>
             <div>
-                <p class="text-[10px] text-blue-600 font-black uppercase tracking-widest mb-3 italic">Sanlitun Store</p>
-                <p class="text-lg font-black mb-1 text-white">世茂工三二层F2</p>
-                <p class="text-xs text-zinc-600">2F, Shimao Gongsan, Sanlitun, Beijing</p>
+                <p class="text-[11px] text-blue-600 font-black uppercase tracking-widest mb-4 italic eng-sub underline decoration-2">Sanlitun Store</p>
+                <p class="text-xl font-black mb-1 text-white zh-title">世茂工三二层F2</p>
+                <p class="text-xs text-zinc-500 font-medium italic">2nd Floor, Shimao Gongsan, Sanlitun, Beijing</p>
+                <p class="mt-4 text-xs font-black text-zinc-300 eng-sub">Hotline: 010-6666-6666</p>
             </div>
             <div class="flex flex-col items-center md:items-end">
-                <div class="bg-white p-1 rounded-sm w-32 h-32">
-                    <!-- 使用指定的官网二维码图片 -->
-                    <img src="Scan-to-Book.jpg" alt="CFC QR CODE" class="w-full h-full object-contain">
+                <div class="bg-white p-1 rounded-lg w-36 h-36 shadow-2xl shadow-white/5">
+                    <img src="Scan-to-Book.jpg" alt="CFC Booking QR" class="w-full h-full object-contain">
                 </div>
-                <p class="text-[9px] text-zinc-500 mt-2 font-bold tracking-widest uppercase italic">Scan to Book / 扫码预约课程</p>
+                <p class="text-[10px] text-zinc-400 mt-4 font-black tracking-widest uppercase italic eng-sub">Scan to Book / 扫码预约课程</p>
             </div>
         </div>
-        <div class="mt-20 text-center pb-10">
-            <p class="text-[10px] text-zinc-800 font-black italic uppercase tracking-[1em]">CFC FIGHT FOR MORE</p>
+        <div class="mt-24 text-center pb-12">
+            <p class="text-[11px] text-zinc-800 font-black italic uppercase tracking-[1.2em] eng-sub">CFC · FIGHT FOR MORE · EVOLVE</p>
         </div>
     </footer>
 
